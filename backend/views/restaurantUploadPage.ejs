@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Restaurant Uploading</title>
+</head>
+
+<body>
+	<h1>Upload Restaurant Document with StreetVeiw Image on mongoDB</h1>
+	<hr />
+	<div>
+	<form action="/restaurantUpload" method="POST" enctype="multipart/form-data">
+		<div>
+		<label for="name">Resturant Name</label>
+		<input
+			type="text"
+			id="name"
+			placeholder="Name"
+			value=""
+			name="name"
+			required
+		/>
+		</div>
+        <div>
+        <label for="address">Address</label>
+            <div>
+                <label for="building">building</label>
+                <input
+                    type="text"
+                    id="building"
+                    placeholder="building"
+                    value=""
+                    name="address[building]"
+                    required
+                />
+            </div>
+            <div>
+                <label for="street">street</label>
+                <input
+                    type="text"
+                    id="street"
+                    placeholder="street"
+                    value=""
+                    name="address[street]"
+                    required
+                />
+            </div>
+            <div>
+                <label for="zipcode">zipcode</label>
+                <input
+                    type="text"
+                    id="zipcode"
+                    placeholder="zipcode"
+                    value=""
+                    name="address[zipcode]"
+                    required
+                />
+            </div>
+            <div>
+                <label for="borough">borough</label>
+                <input
+                    type="text"
+                    id="borough"
+                    placeholder="borough"
+                    value=""
+                    name="address[borough]"
+                    required
+                />
+            </div>
+        </div>
+		<div>
+		<label for="image">Upload Street View Image</label>
+		<input type="file" id="image" name="image" value="" required />
+		</div>
+        <div>
+            <label for="cuisine">cuisine</label>
+            <input
+                type="text"
+                id="cuisine"
+                placeholder="cuisine"
+                value=""
+                name="cuisine"
+                required
+            />
+            </div>
+        <div>
+            <label for="description">Resturant Description</label>
+            <textarea
+                id="description"
+                name="description"
+                value=""
+                rows="2"
+                placeholder="Description"
+                required
+            >
+            </textarea>
+        </div>
+        <div>
+            <label for="links">links</label>
+                <div>
+                    <label for="site">website</label>
+                    <input
+                        type="text"
+                        id="site"
+                        placeholder="site"
+                        value=""
+                        name="links[site]"
+                    />
+                </div>
+                <div>
+                    <label for="insta">instagram</label>
+                    <input
+                        type="text"
+                        id="insta"
+                        placeholder="insta"
+                        value=""
+                        name="links[insta]"
+                    />
+                </div>
+                <div>
+                    <label for="x">x twitter</label>
+                    <input
+                        type="text"
+                        id="x"
+                        placeholder="x"
+                        value=""
+                        name="links[x]"
+                    />
+                </div>
+                <div>
+                    <label for="fb">FaceBook Meta</label>
+                    <input
+                        type="text"
+                        id="fb"
+                        placeholder="fb"
+                        value=""
+                        name="links[fb]"
+                    />
+                </div>
+            </div>
+		<div>
+		<button type="submit">Submit</button>
+		</div>
+	</form>
+	</div>
+
+	<hr />
+
+	
+</body>
+</html>
