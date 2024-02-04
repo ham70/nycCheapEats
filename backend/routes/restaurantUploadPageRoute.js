@@ -30,8 +30,7 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage})
 
 //====================================================================================================================================================================
-//Post routes
-//route for creating a new restaurant
+//Get routes
 router.get('/', (request, response) => {
     NewRestaurant.find({})
     .then((data, error)=>{
@@ -50,7 +49,20 @@ router.get('/othermedia', (request, response) => {
 		response.render('othermediauploadpage',{items: data})
     })
 })
+router.get('/updateStreetView', (request, response) => {
+    NewRestaurant.find({})
+    .then((data, error)=>{
+		if(error){
+			console.log(error);
+		}
+		response.render('updatestreetviewpage',{items: data})
+    })
+})
 
+//====================================================================================================================================================================
+//Post routes
+
+//route for creating a new restuarant without othermedie images
 router.post('/', upload.single('image'), (request, response, next) => {
     const buffer = fs.readFileSync(path.join(__dirname, '../uploads/', request.file.filename))
 
@@ -91,6 +103,8 @@ router.post('/', upload.single('image'), (request, response, next) => {
     })
 })
 
+
+//route for adding images to the othermedia array of a document one image at a time
 router.post('/othermedia', upload.single('image'), async (request, response, next) => {
     //retrieveing the resturant id and the file uploaded
     const restaurantId = request.body.restaurantId
@@ -106,6 +120,32 @@ router.post('/othermedia', upload.single('image'), async (request, response, nex
     try {
         const updatedRestaurant = await NewRestaurant.findById(restaurantId)
         updatedRestaurant.images.OtherMedia.push(imageObject)
+        await updatedRestaurant.save()
+
+        response.send('Image uploaded successfully')
+    } catch (error) {
+        response.status(500).send(error)
+    }
+})
+
+
+//route for updatin the streetview image of a document
+router.post('/updateStreetView', upload.single('image'), async (request, response, next) => {
+    console.log("right route")
+    //retrieveing the resturant id and the file uploaded
+    const restaurantId = request.body.restaurantId
+    const buffer = fs.readFileSync(path.join(__dirname, '../uploads/', request.file.filename))
+
+    //creating an imageObject from the image uploaded
+    var imageObject = {
+        Data: buffer,
+        ContentType: getImageType(buffer)
+    }
+
+    //adding the uploaded image to the OtherMedia array of the restuarant document in question
+    try {
+        const updatedRestaurant = await NewRestaurant.findById(restaurantId)
+        updatedRestaurant.images.StreetView = imageObject
         await updatedRestaurant.save()
 
         response.send('Image uploaded successfully')
