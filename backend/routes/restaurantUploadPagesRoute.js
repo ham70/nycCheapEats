@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import { NewRestaurant } from '../restaurantNewModel.js'
+import { Restaurant } from '../restaurantModel.js'
 import path from 'path'
 import multer from 'multer'
 import fs from 'fs'
@@ -32,7 +32,7 @@ var upload = multer({storage: storage})
 //====================================================================================================================================================================
 //Get routes
 router.get('/', (request, response) => {
-    NewRestaurant.find({})
+    Restaurant.find({})
     .then((data, error)=>{
 		if(error){
 			console.log(error);
@@ -41,7 +41,7 @@ router.get('/', (request, response) => {
     })
 })
 router.get('/othermedia', (request, response) => {
-    NewRestaurant.find({})
+    Restaurant.find({})
     .then((data, error)=>{
 		if(error){
 			console.log(error);
@@ -50,7 +50,7 @@ router.get('/othermedia', (request, response) => {
     })
 })
 router.get('/updateStreetView', (request, response) => {
-    NewRestaurant.find({})
+    Restaurant.find({})
     .then((data, error)=>{
 		if(error){
 			console.log(error);
@@ -67,7 +67,7 @@ router.post('/', upload.single('image'), (request, response, next) => {
     const buffer = fs.readFileSync(path.join(__dirname, '../uploads/', request.file.filename))
 
     //creating a resturant object given the uploaded information following the porper schema
-    var newRestaurant = {
+    var restaurant = {
         name: request.body.name,
         address: {
             building: request.body.address.building,
@@ -94,7 +94,7 @@ router.post('/', upload.single('image'), (request, response, next) => {
     }
 
     //creating the document 
-    NewRestaurant.create(newRestaurant)
+    Restaurant.create(restaurant)
     .then(() => {
         response.send('Document upload successful')
     })
@@ -118,7 +118,7 @@ router.post('/othermedia', upload.single('image'), async (request, response, nex
 
     //adding the uploaded image to the OtherMedia array of the restuarant document in question
     try {
-        const updatedRestaurant = await NewRestaurant.findById(restaurantId)
+        const updatedRestaurant = await Restaurant.findById(restaurantId)
         updatedRestaurant.images.OtherMedia.push(imageObject)
         await updatedRestaurant.save()
 
@@ -144,7 +144,7 @@ router.post('/updateStreetView', upload.single('image'), async (request, respons
 
     //adding the uploaded image to the OtherMedia array of the restuarant document in question
     try {
-        const updatedRestaurant = await NewRestaurant.findById(restaurantId)
+        const updatedRestaurant = await Restaurant.findById(restaurantId)
         updatedRestaurant.images.StreetView = imageObject
         await updatedRestaurant.save()
 

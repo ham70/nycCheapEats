@@ -49,4 +49,4 @@ restaurantNewSchema.index({
     'cuisine': 'text',
 })
 
-export const NewRestaurant = mongoose.model('NewRestaurant', restaurantNewSchema)
+export const Restaurant = mongoose.model('Restaurant', restaurantNewSchema)

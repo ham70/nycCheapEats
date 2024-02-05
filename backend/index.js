@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import restaurantsRoute from './routes/restaurantRoute.js'
-import restaurantUploadPageRoute from './routes/restaurantUploadPageRoute.js'
+import restaurantUploadPagesRoute from './routes/restaurantUploadPagesRoute.js'
 
 //==================================================================================
 //getting resources from .env file
@@ -19,7 +19,7 @@ app.set("view engine", "ejs");
 
 //routes==================================================================================
 app.use('/restaurants', restaurantsRoute)
-app.use('/restaurantUpload', restaurantUploadPageRoute)
+app.use('/restaurantUpload', restaurantUploadPagesRoute)
 
 app.get('/', (request, response) => {
     console.log(request)

@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import { NewRestaurant } from '../restaurantNewModel.js'
+import { Restaurant } from '../restaurantModel.js'
 import multer from 'multer'
 import bodyParser from 'body-parser'
 
@@ -40,13 +40,13 @@ router.post('/', async (request, response) => {
             })
         }
         //if the post has a name and address than a new restauran object is created
-        const newRestaurant = {
+        const Restaurant = {
             name: request.body.name,
             address: request.body.address,
         }
 
         //the restaurant is created using the schema and added to the db
-        const restaurant = await NewRestaurant.create(newRestaurant)
+        const restaurant = await Restaurant.create(Restaurant)
 
         // the restaurant value is then sent back to where the request was made
         return response.status(201).send(restaurant)
@@ -59,7 +59,7 @@ router.post('/', async (request, response) => {
 //route for updating any non image related field of the document
 router.post('/update/:id', async (request, response) => {
     const { id } = request.params
-    const restaurant = await NewRestaurant.findById(id)
+    const restaurant = await Restaurant.findById(id)
 
     try {
         //checking any values that may want to be updated given the request json body
@@ -128,7 +128,7 @@ router.post('/update/:id', async (request, response) => {
 router.get('/', async (request, response) => {
     try {
         //recieves all restaurants from db
-        const restaurants = await NewRestaurant.find({})
+        const restaurants = await Restaurant.find({})
 
         //returns object contain all the restaurants and a count of them
         return response.status(200).json({
@@ -147,7 +147,7 @@ router.get('/id/:id', async (request, response) => {
         const { id } = request.params
 
         //recieves restaurant from db
-        const restaurant = await NewRestaurant.findById(id)
+        const restaurant = await Restaurant.findById(id)
 
         //creating base64 string for restaurant image
         const img = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
@@ -166,7 +166,7 @@ router.get('/search/:query', async (request, response) => {
         let { query } = request.params
         const strSearch = query.toString().toLowerCase()
 
-        const restaurants = await NewRestaurant.find({ $text: { $search: strSearch }})
+        const restaurants = await Restaurant.find({ $text: { $search: strSearch }})
     
         return response.status(200).json({restaurants})
     } catch (error) {
@@ -195,7 +195,7 @@ router.put('/:restaurandId', async (request, response) => {
         const { id } = request.params
 
         //update restaurand in db and return result
-        const result = await NewRestaurant.findByIdAndUpdate(id, request.body)
+        const result = await Restaurant.findByIdAndUpdate(id, request.body)
 
         if(!result) {
             return response.status(404).json({ message: 'Restaurant not found'})
@@ -215,7 +215,7 @@ router.delete('/deleteRestaurant/:restaurantId', async (request, response) => {
         const { restaurantId } = request.params
 
         //find restaurant in db and delete
-        const result = await NewRestaurant.findByIdAndDelete(restaurantId)
+        const result = await Restaurant.findByIdAndDelete(restaurantId)
 
         if(!result) {
             return response.status(404).json({ message: 'Restaurant not found'})
@@ -238,7 +238,7 @@ router.delete('/deleteImage/:restaurantId', async (request, response) => {
         const imageId = request.body.id
 
         //finding restaurant in db and deleting desired object
-        const restaurant = await NewRestaurant.findById(restaurantId)
+        const restaurant = await Restaurant.findById(restaurantId)
         restaurant.images.OtherMedia.remove(imageId)
         await restaurant.save()
 
