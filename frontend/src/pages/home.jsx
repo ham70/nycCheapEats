@@ -4,7 +4,7 @@ import SearchBar from '../components/searchbar'
 const Home = () => {
   return (
     <div className='Home'>
-        <h1>Welcome to NYC CHEAT EATS</h1>
+        <h1>Welcome to NYC CHEAP EATS</h1>
       <div className='searchBar'>
         <SearchBar/>
       </div>

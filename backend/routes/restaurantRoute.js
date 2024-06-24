@@ -3,6 +3,7 @@ const router = express.Router();
 import { Restaurant } from '../restaurantModel.js'
 import multer from 'multer'
 import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
 
 //setting up middleware for router
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -149,11 +150,15 @@ router.get('/id/:id', async (request, response) => {
         //recieves restaurant from db
         const restaurant = await Restaurant.findById(id)
 
-        //creating base64 string for restaurant image
-        const img = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
+        //creating base64 string for restaurant streetview image
+        const streetViewImg = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
+
+        //creating an array of base64 strings for otherMedia images
+        //creating an array of base64 strings for otherMedia images
+        const otherMediaImgs = restaurant.images.OtherMedia.map(img => Buffer.from(img.Data).toString('base64'))
 
         //returns restaurant to client
-        return response.status(200).json({restaurant, img})
+        return response.status(200).json({restaurant, streetViewImg, otherMediaImgs})
     } catch (error) {
         console.log(error.message)
         response.status(500).send({message: error.message})
@@ -167,8 +172,16 @@ router.get('/search/:query', async (request, response) => {
         const strSearch = query.toString().toLowerCase()
 
         const restaurants = await Restaurant.find({ $text: { $search: strSearch }})
+
+        const streetviewImages = restaurants.map(restaurant => {
+            // Convert the StreetView image to base64
+            const streetViewImg = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
+
+            // Return a new object with the additional images property
+            return {streetViewImg}
+        })
     
-        return response.status(200).json({restaurants})
+        return response.status(200).json({restaurants, streetviewImages})
     } catch (error) {
         console.log(error.message)
         response.status(500).send({message: error.message})
@@ -180,17 +193,8 @@ router.get('/search/:query', async (request, response) => {
 //put and delete routes
 
 //route to updating restaurant (no image)
-router.put('/:restaurandId', async (request, response) => {
+router.put('/:restaurantId', async (request, response) => {
     try {
-        
-        if (
-            !request.body.name ||
-            !request.body.address
-        ) {
-            return response.status(501).send({
-                message: 'Send all required fields: Name, address',})
-        }
-
         //if request valid than find id of restaurant from request
         const { id } = request.params
 

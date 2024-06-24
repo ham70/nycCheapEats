@@ -9,6 +9,7 @@ const Searchresults = () => {
 
   const [restaurants, setRestaurants] = useState([])
 
+
   useEffect(() => { retrieveRestaurants() }, [query])
 
 
@@ -18,7 +19,13 @@ const Searchresults = () => {
       .then(response => {
         console.log(`this is the data ${response.data}`)
         console.log(response.data)
-        setRestaurants(response.data.restaurants)
+        
+        // Combine the restaurants and streetviewImages arrays
+        const combinedData = response.data.restaurants.map((restaurant, index) => {
+          return {...restaurant, streetViewImg: response.data.streetviewImages[index].streetViewImg}
+        })
+  
+        setRestaurants(combinedData)
       })
       .catch(e => {
         console.log(e)
@@ -28,13 +35,20 @@ const Searchresults = () => {
   return (
     <div>
       <h1>{headertext}</h1>
-      <div>
+      <div className='restaurant-gallery'>
         {restaurants.map((restaurant) => {
           const fullAddress = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`
           return (
             <div>
-              <Link to={'/restaurant/id/'+restaurant._id}>{restaurant.name}</Link>
-              <h3>address: {fullAddress}</h3>
+              <Link to={'/restaurant/id/'+restaurant._id}>
+                <div className="restaurant-item">
+                  {restaurant.name}
+                  <div>
+                    <img src= {`data:image/png;base64,${restaurant.streetViewImg}`} alt={restaurant.name} className= "restaurant-street-image"/>
+                  </div>
+                  <h3>address: {fullAddress}</h3>
+                </div>                
+              </Link>
             </div>
           )
         })}

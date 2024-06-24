@@ -15,14 +15,18 @@ const Restaurant = () => {
     const [restaurant, setRestaurant] = useState(initialRestaurantState);
 
     //image
-    const [image, setImage] = useState([])
+    const [streetViewImg, setImage] = useState("")
+
+    const [otherMediaImgs, setOtherMediaImgs] = useState([])
 
     //
     const getRstaurant = id => {
         RestaurantDataService.get(id)
             .then(response => {
+                console.log(response.data)
                 setRestaurant(response.data.restaurant)
-                setImage(response.data.img)
+                setImage(response.data.streetViewImg)
+                setOtherMediaImgs(response.data.otherMediaImgs)
             })
             .catch(error => {
                 console.log(error)
@@ -37,9 +41,15 @@ const Restaurant = () => {
         <div>
             {restaurant ? (
                 <div>
-                    <img src={`data:image/png;base64,${image}`}/>
+                    <img src={`data:image/png;base64,${streetViewImg}`}/>
                     <h3>{restaurant.name}</h3>
                     <p>{restaurant.address.building} {restaurant.address.street}, {restaurant.address.zipcode}</p>
+                    <p>{restaurant.description}</p>
+                    <div className="image-gallery">
+                        {otherMediaImgs.map((img, index) => (
+                            <img key={index} src={`data:image/png;base64,${img}`} alt={`Other Media ${index + 1}`} className="gallery-image"/>
+                        ))}
+                    </div>
                 </div>
             ) : (
                 <div>
