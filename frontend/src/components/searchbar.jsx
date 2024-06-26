@@ -10,11 +10,14 @@ const SearchBar = () => {
     }
 
     const handleSearchSubmit = async () => {
-        navigate(`/search/${searchTerm}`)
+        if(searchTerm != ""){
+            navigate(`/search/${searchTerm}`)
+        }
+
     }
 
     return (
-        <div>
+        <div className='search-bar'>
             <input
                 type="text"
                 placeholder="enter keyword(s)"

@@ -32,6 +32,10 @@ const Searchresults = () => {
       })
   }
 
+  const shortenName = (name) => {
+    return name.length > 25 ? name.substring(0, 25) + "..." : name;
+  }
+
   return (
     <div>
       <h1>{headertext}</h1>
@@ -39,14 +43,14 @@ const Searchresults = () => {
         {restaurants.map((restaurant) => {
           const fullAddress = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`
           return (
-            <div>
-              <Link to={'/restaurant/id/'+restaurant._id}>
-                <div className="restaurant-item">
-                  {restaurant.name}
+            <div className="restaurant-item">
+              <Link to={'/restaurant/id/'+restaurant._id} className='restaurant-link'>
+                <div >
+                  <div className='restaurant-name'>{shortenName(restaurant.name)}</div>
                   <div>
                     <img src= {`data:image/png;base64,${restaurant.streetViewImg}`} alt={restaurant.name} className= "restaurant-street-image"/>
                   </div>
-                  <h3>address: {fullAddress}</h3>
+                  <h5 className='restaurant-address'>Address: {fullAddress}</h5>
                 </div>                
               </Link>
             </div>

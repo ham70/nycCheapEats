@@ -1,6 +1,15 @@
+body {
+  background: linear-gradient(to bottom, rgb(245, 192, 18), #3498db);
+  overflow-x: hidden;
+
+  height: 100vh;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 .App {
   text-align: center;
-  background-color: #3498DB;
 }
 
 .App-logo {
@@ -40,43 +49,131 @@
 
 /*REACT COMPONENTS CSS BELOW*/
 
-/*navbar start =====================================================*/
-.navbar {
+/*Search bar start =======================================================*/
+.search-bar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 5px;
 }
 
+.search-bar input {
+  width: 200px;
+  padding: 10px;
+  border: none;
+  border-radius: 50px 0 0 50px; /* adjust as needed */
+  transition: width 0.5s ease-in-out;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 0 50px 50px 0; /* adjust as needed */
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.search-bar button:hover {
+  background-color: #2feb61;
+}
+/*Search bar end =======================================================*/
+
+
+
+/*Navbar start =====================================================*/
+.navbar {
+  position: flex;
+  top: 5px; /* adjust as needed */
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 7px;
+}
+
+.navbar a {
+  display: inline-block;
+  padding: 10px 20px;
+  color: rgb(235, 224, 224); 
+  background-color: #3498db; 
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  background-color: #2feb61; /* replace with your preferred color */
+}
 /*Navbar end =====================================================*/
+
+
+
+/*home page start =====================================================*/
+.header-text {
+  padding-top: 2px;
+}
+/*home page end =====================================================*/
+
+
 
 /*search page start =====================================================*/
 .restaurant-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  justify-content: center;
+  margin: 5px;
 }
 
+
 .restaurant-item {
-  border: 1px solid #ccc;
-  padding: 20px;
+  border-radius: 15%;
+  border: solid;
+  border-width: 3px;
+  border-color: #2feb61;
+  padding: 10px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 450px;
+  transition: background-color 0.4s ease-in-out;
+  text-decoration: none;
+
 }
 
+.restaurant-item:hover {
+  background-color: #2feb61;
+}
+
+.restaurant-name {
+  width: 90%;
+}
 
 .restaurant-street-image {
   width: 300px;
   height: 300px;
   margin: 10px;
   object-fit: cover;
+  border-radius: 10%;
 }
 
+.restaurant-link {
+  color: black;
+  text-decoration: none;
+}
 /*search page end =====================================================*/
 
+
+
 /*restaurant page start =====================================================*/
+.main-image {
+  border-radius: 10%;
+}
 
 /*other media image*/
 .image-gallery {
@@ -90,6 +187,6 @@
   width: 200px; /* adjust as needed */
   height: 200px; /* adjust as needed */
   margin: 10px;
+  border-radius: 10%;
 }
-
 /*restaurant page end =====================================================*/
