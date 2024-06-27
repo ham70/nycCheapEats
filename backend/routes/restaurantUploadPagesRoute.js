@@ -85,10 +85,10 @@ router.post('/', upload.single('image'), (request, response, next) => {
         cuisine: request.body.cuisine,
         description: request.body.description,
         links: {
-            site: request.body.links.site,
-            insta: request.body.links.insta,
-            x: request.body.links.x,
-            fb: request.body.links.fb,
+            site: request.body.links.site || "none",
+            insta: request.body.links.insta || "none",
+            x: request.body.links.x || "none",
+            fb: request.body.links.fb || "none",
         },
         stars: 0
     }
