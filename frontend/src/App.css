@@ -173,6 +173,12 @@ body {
 /*restaurant page start =====================================================*/
 .main-image {
   border-radius: 10%;
+  margin-left: 1%
+}
+
+.restaurant-text {
+  text-align: left;
+  padding-left: 20%;
 }
 
 /*other media image*/
@@ -184,9 +190,33 @@ body {
 
 .gallery-image {
   object-fit: cover;
-  width: 200px; /* adjust as needed */
-  height: 200px; /* adjust as needed */
+  width: 25%;
+  height: 200px;
   margin: 10px;
   border-radius: 10%;
 }
+
+/*restaurant links to their socials sources*/
+/*i'm thinking of something like icons: None or a shortened hyper link*/
+.restaurant-links{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
 /*restaurant page end =====================================================*/
+
+
+
+/*about page start =====================================================*/
+.long-text {
+  padding-right: 5%;
+  padding-left: 5%;
+}
+.abt-header {
+  padding-top: 7%;
+}
+
+/*about page end =====================================================*/
