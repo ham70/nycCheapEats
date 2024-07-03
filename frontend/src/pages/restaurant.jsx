@@ -1,38 +1,46 @@
 import React, {useState, useEffect } from 'react'
 import RestaurantDataService from '../services/restaurant.js'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import SearchBar from '../components/searchbar.jsx';
 
 //social media icons
-import { FaMeta } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
 
 //restaurant website icon
 import { CgWebsite } from "react-icons/cg";
 
-//icons array
-const icons = {CgWebsite, FaInstagram, FaXTwitter, FaMeta};
-
-
 const Restaurant = () => {
     //getting restuarant id and initializing inital state
     const { id } = useParams()
 
+    //creating an initial state 
     const initialRestaurantState = {
         id: null,
         name: "",
         address: {},
-        img: {}
+        images: {
+            StreetView: {
+                Data: null,
+            },
+            OtherMedia: [{
+                Data: null,
+            }]
+        },
+        links: {
+            site: "none",
+            insta: "none",
+            x: "none",
+            fb: "none"
+        }
     };
     const [restaurant, setRestaurant] = useState(initialRestaurantState);
 
     //image
     const [streetViewImg, setImage] = useState("")
-
     const [otherMediaImgs, setOtherMediaImgs] = useState([])
 
-    const [restaurantLinks, setLinks] = useState([])
 
     //
     const getRstaurant = id => {
@@ -42,7 +50,6 @@ const Restaurant = () => {
                 setRestaurant(response.data.restaurant)
                 setImage(response.data.streetViewImg)
                 setOtherMediaImgs(response.data.otherMediaImgs)
-                setLinks(response.data.restaurant.links)
             })
             .catch(error => {
                 console.log(error)
@@ -67,8 +74,8 @@ const Restaurant = () => {
                         <p>{restaurant.address.building} {restaurant.address.street}, {restaurant.address.borough}, {restaurant.address.zipcode}</p>
 
                         <div className='restaurant-text'>
-                            <p>Cuisine Type: {restaurant.cuisine}</p>
-                            <p>Description: {restaurant.description}</p>
+                            <p className='cuisine-box'><strong>Cuisine Type: </strong>{restaurant.cuisine}</p>
+                            <p className='description-box'><strong>Description: </strong> {restaurant.description} </p>
                         </div>
                         
                         <div className="image-gallery">
@@ -77,7 +84,31 @@ const Restaurant = () => {
                             ))}
                         </div>
                         <div className='restaurant-links'>
+                            <div className='social-icons'>
+                                {restaurant.links.site !== "none" ? (
+                                    <Link to={restaurant.links.site}><CgWebsite/></Link>
+                                ) : (
+                                    <span><CgWebsite/></span>
+                                )}
+                                {restaurant.links.insta !== "none" ? (
+                                    <Link to={restaurant.links.insta}><FaInstagram/></Link>
+                                ) : (
+                                    <span><FaInstagram/></span>
+                                )}
+                                
+                                {restaurant.links.x !== "none" ? (
+                                    <Link to={restaurant.links.x}><FaXTwitter/></Link>
+                                ) : (
+                                    <span><FaXTwitter/></span>
+                                )}
+                                {restaurant.links.fb !== "none" ? (
+                                    <Link to={restaurant.links.fb}><FaFacebook/></Link>
+                                ) : (
+                                    <span><FaFacebook /></span>
+                                )}
+                            </div>
                         </div>
+
 
                     </div>
                 ) : (
