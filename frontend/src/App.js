@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import { Switch, BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './components/navbar'
 import Home from './pages/home'
 import About from './pages/about'
@@ -11,6 +11,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        {/*we want the navbar to be displayed on every single page so it goes at the top*/}
         <div className='navbar'>
           <Navbar/>
         </div>

@@ -2,25 +2,30 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import RestaurantDataService from '../services/restaurant.js'
 
+//this reast component is essentially a big container to displaying all the 
+//restaurant returned by the database whenever a query is made
+//we will display each restaurant in a gallery format including the restaurant
+//name, address, and a picture form the streetview
+
 const Searchresults = () => {
+  //retrieving the query from the url with useParams and saving it in a variable to display on the page
   const { query } = useParams()
-  console.log(query)
   const headertext = query
 
+  //creating a state variable restaurants as an empty array to later hold 
+  // all the restaurants returned by the backend when a query is made
   const [restaurants, setRestaurants] = useState([])
-
 
   useEffect(() => { retrieveRestaurants() }, [query])
 
-
-
+  //getting the restaurants from the array
   const retrieveRestaurants = () => {
     RestaurantDataService.find(query)
       .then(response => {
-        console.log(`this is the data ${response.data}`)
-        console.log(response.data)
-        
-        // Combine the restaurants and streetviewImages arrays
+        //we retrieve the restaurants data as mulitple arrays because of this
+        // we want to Combine the restaurants and streetviewImages arrays
+        //into the restaurants state variable
+
         const combinedData = response.data.restaurants.map((restaurant, index) => {
           return {...restaurant, streetViewImg: response.data.streetviewImages[index].streetViewImg}
         })
@@ -32,6 +37,8 @@ const Searchresults = () => {
       })
   }
 
+  //some restaurants may have names too long to display neatly
+  // because of this we create a shortenName method to clean things up when needed
   const shortenName = (name) => {
     return name.length > 25 ? name.substring(0, 25) + "..." : name;
   }

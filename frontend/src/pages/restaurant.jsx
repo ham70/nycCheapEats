@@ -3,19 +3,19 @@ import RestaurantDataService from '../services/restaurant.js'
 import { useParams, Link } from 'react-router-dom';
 import SearchBar from '../components/searchbar.jsx';
 
-//social media icons
+//import icons for the website link and social media links
 import { FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
-
-//restaurant website icon
 import { CgWebsite } from "react-icons/cg";
+
 
 const Restaurant = () => {
     //getting restuarant id and initializing inital state
+    //the id in the url so we use the useParams hook from react-router-dom
     const { id } = useParams()
 
-    //creating an initial state 
+    //creating an initial state of the restaurant corresponding to what we expect to recieve from the api
     const initialRestaurantState = {
         id: null,
         name: "",
@@ -35,14 +35,13 @@ const Restaurant = () => {
             fb: "none"
         }
     };
-    const [restaurant, setRestaurant] = useState(initialRestaurantState);
 
-    //image
+    const [restaurant, setRestaurant] = useState(initialRestaurantState);
     const [streetViewImg, setImage] = useState("")
     const [otherMediaImgs, setOtherMediaImgs] = useState([])
 
 
-    //
+    //getting restaurant data from api and assigning the proper data to their respective variables
     const getRstaurant = id => {
         RestaurantDataService.get(id)
             .then(response => {
@@ -60,6 +59,7 @@ const Restaurant = () => {
         getRstaurant(id)
     }, [id])
 
+    //returning the webpage
     return (
         <div>
             <div className='search-bar'>
@@ -85,6 +85,9 @@ const Restaurant = () => {
                         </div>
                         <div className='restaurant-links'>
                             <div className='social-icons'>
+
+                                {/*If the link is in the data base display the icon and link it to the url in the database 
+                                otherwise the "none" will stand in the url and the icon will stil be diplayed but there will be no lin*/}
                                 {restaurant.links.site !== "none" ? (
                                     <Link to={restaurant.links.site}><CgWebsite/></Link>
                                 ) : (
