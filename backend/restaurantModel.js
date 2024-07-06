@@ -1,6 +1,8 @@
 import mongoose from "mongoose"
 const { Schema } = mongoose
 
+//this the schema defining what a restaurant is in our mongodb database using the 3rd party mongoose library
+
 const restaurantNewSchema = new Schema(
     {
         name: {
@@ -42,6 +44,8 @@ const restaurantNewSchema = new Schema(
     }
 )
 
+//search indexs
+//users may search the database using text in any/all of these fields
 restaurantNewSchema.index({
     'name': 'text',
     'address.borough': 'text',

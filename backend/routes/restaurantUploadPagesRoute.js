@@ -7,6 +7,9 @@ import fs from 'fs'
 import bodyParser from 'body-parser'
 import getImageType from '../utils.js'
 
+//These routes all correspond to .ejs files within the view directory
+//they will not be used in prod for database security
+
 
 //setting up middleware for router
 router.use(bodyParser.urlencoded({ extended: true }))
@@ -30,7 +33,7 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage})
 
 //====================================================================================================================================================================
-//Get routes
+//Get routes establishing each of the pages int he view directory
 router.get('/', (request, response) => {
     Restaurant.find({})
     .then((data, error)=>{

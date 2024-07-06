@@ -19,7 +19,9 @@ app.set("view engine", "ejs");
 
 //routes==================================================================================
 app.use('/restaurants', restaurantsRoute)
-app.use('/restaurantUpload', restaurantUploadPagesRoute)
+
+//these routes are exlcuded in prod
+//app.use('/restaurantUpload', restaurantUploadPagesRoute)
 
 app.get('/', (request, response) => {
     console.log(request)

@@ -3,7 +3,6 @@ const router = express.Router();
 import { Restaurant } from '../restaurantModel.js'
 import multer from 'multer'
 import bodyParser from 'body-parser'
-import mongoose from 'mongoose'
 
 //setting up middleware for router
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -20,13 +19,93 @@ var storage = multer.diskStorage({
 })
 var upload = multer({storage: storage})
 
+/*
+BELOW ARE ALL THE API ROUTES
+for the main/production branch only all non-get routes will be commented out 
+this is to prevent anyone who isn't supposed to from altering any inside the database
+*/
+
+//====================================================================================================================================================================
+//get routes
+
+//route to get all restaurants from db
+router.get('/', async (request, response) => {
+    try {
+        //recieves all restaurants from db
+        const restaurants = await Restaurant.find({})
+
+        //returns object contain all the restaurants and a count of them
+        return response.status(200).json({
+            count: restaurants.length,
+            data: restaurants
+        })
+    } catch (error) {
+        console.log(error.message)
+        response.status(500).send({message: error.message})
+    }
+})
+
+//route to get details of one restaurant using ID
+router.get('/id/:id', async (request, response) => {
+    try {
+        const { id } = request.params
+
+        //recieves restaurant from db
+        const restaurant = await Restaurant.findById(id)
+
+        //creating base64 string for restaurant streetview image
+        const streetViewImg = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
+
+        //creating an array of base64 strings for otherMedia images
+        const otherMediaImgs = restaurant.images.OtherMedia.map(img => Buffer.from(img.Data).toString('base64'))
+
+        //returns restaurant to client
+        return response.status(200).json({restaurant, streetViewImg, otherMediaImgs})
+    } catch (error) {
+        console.log(error.message)
+        response.status(500).send({message: error.message})
+    }
+})
+
+//route to get restaurants by text search
+router.get('/search/:query', async (request, response) => {
+    try {
+        //getting the query text and converting it to all lowercase
+        let { query } = request.params
+        const strSearch = query.toString().toLowerCase()
+
+        //getting all the restaurants from the api
+        const restaurants = await Restaurant.find({ $text: { $search: strSearch }})
+
+        const streetviewImages = restaurants.map(restaurant => {
+            //we need to convert the StreetView image to a base64 buffer so it can be displayed on the wedpage
+            const streetViewImg = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
+
+            //return a new object with the additional images property
+            return {streetViewImg}
+        })
+    
+        //returning data from the restaurants and the streetviewimages as two organized but separate arrays
+        return response.status(200).json({restaurants, streetviewImages})
+    } catch (error) {
+        console.log(error.message)
+        response.status(500).send({message: error.message})
+    }
+})
+
+
+//====================================================================================================================================================================
+
+/*
+THE FOLLOWING ROUTES WILL BE COMMENTED OUT FOR PRODUCTION FOR DATABASE SECURITY
+
 //====================================================================================================================================================================
 //Post routes
 
 //route for creating a new restaurant without images
 router.post('/', async (request, response) => {
     try {
-        if (//the post must have a name and address before being sent to db
+        if (//the post must have the following before being sent to db
             !request.body.name ||
             !request.body.address ||
             !request.body.address.borough ||
@@ -40,10 +119,12 @@ router.post('/', async (request, response) => {
                 message: 'Send all required fields: Name; complete address with building, borough, street, and zipcode; cuisine; and description',
             })
         }
-        //if the post has a name and address than a new restauran object is created
+        //if the post has a name and address than a new restaurant object is created
         const Restaurant = {
             name: request.body.name,
             address: request.body.address,
+            cuisine: request.body.cuisine,
+            description: request.body.description
         }
 
         //the restaurant is created using the schema and added to the db
@@ -122,74 +203,7 @@ router.post('/update/:id', async (request, response) => {
 })
 
 
-//====================================================================================================================================================================
-//get routes
 
-//route to get all restaurants from db
-router.get('/', async (request, response) => {
-    try {
-        //recieves all restaurants from db
-        const restaurants = await Restaurant.find({})
-
-        //returns object contain all the restaurants and a count of them
-        return response.status(200).json({
-            count: restaurants.length,
-            data: restaurants
-        })
-    } catch (error) {
-        console.log(error.message)
-        response.status(500).send({message: error.message})
-    }
-})
-
-//route to get details of one restaurant using ID
-router.get('/id/:id', async (request, response) => {
-    try {
-        const { id } = request.params
-
-        //recieves restaurant from db
-        const restaurant = await Restaurant.findById(id)
-
-        //creating base64 string for restaurant streetview image
-        const streetViewImg = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
-
-        //creating an array of base64 strings for otherMedia images
-        //creating an array of base64 strings for otherMedia images
-        const otherMediaImgs = restaurant.images.OtherMedia.map(img => Buffer.from(img.Data).toString('base64'))
-
-        //returns restaurant to client
-        return response.status(200).json({restaurant, streetViewImg, otherMediaImgs})
-    } catch (error) {
-        console.log(error.message)
-        response.status(500).send({message: error.message})
-    }
-})
-
-//route to get restaurants by text search
-router.get('/search/:query', async (request, response) => {
-    try {
-        let { query } = request.params
-        const strSearch = query.toString().toLowerCase()
-
-        const restaurants = await Restaurant.find({ $text: { $search: strSearch }})
-
-        const streetviewImages = restaurants.map(restaurant => {
-            // Convert the StreetView image to base64
-            const streetViewImg = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
-
-            // Return a new object with the additional images property
-            return {streetViewImg}
-        })
-    
-        return response.status(200).json({restaurants, streetviewImages})
-    } catch (error) {
-        console.log(error.message)
-        response.status(500).send({message: error.message})
-    }
-})
-
-
-//====================================================================================================================================================================
 //put and delete routes
 
 //route to updating restaurant (no image)
@@ -256,5 +270,6 @@ router.delete('/deleteImage/:restaurantId', async (request, response) => {
         response.status(500).send({message: error.message})
     }
 })
+    */
 
 export default router
