@@ -26,11 +26,3 @@ function App() {
 }
 
 export default App;
-//<Route path="/restaurant/id/:" Component={<Restaurant/>}/>
-
-/*
-<Route path="/restaurant/id/:id" render={(props) => (
-            <Restaurant {...props}/>
-          )}
-          />
-          */

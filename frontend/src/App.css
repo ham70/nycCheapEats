@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(to bottom, rgb(245, 192, 18), #3498db);
+  background: linear-gradient(to bottom, #e9a831, #951226);
   overflow-x: hidden;
 
   height: 100vh;
@@ -86,14 +86,14 @@ body {
   padding: 10px 20px;
   border: none;
   border-radius: 0 50px 50px 0; /* adjust as needed */
-  background-color: #3498db;
+  background-color: #951226;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
 .search-bar button:hover {
-  background-color: #2feb61;
+  background-color: #3498db;
 }
 /*Search bar end =======================================================*/
 
@@ -114,14 +114,14 @@ body {
   display: inline-block;
   padding: 10px 20px;
   color: rgb(235, 224, 224); 
-  background-color: #3498db; 
+  background-color: #951226; 
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s ease-in-out;
 }
 
 .navbar a:hover {
-  background-color: #2feb61; /* replace with your preferred color */
+  background-color: #3498db; /* replace with your preferred color */
 }
 /*Navbar end =====================================================*/
 
@@ -151,7 +151,7 @@ body {
   border-radius: 15%;
   border: solid;
   border-width: 3px;
-  border-color: #2feb61;
+  border-color: #3498db;
   padding: 5px;
   box-sizing: border-box;
   display: flex;
@@ -167,7 +167,7 @@ body {
 }
 
 .restaurant-item:hover {
-  background-color: #2feb61;
+  background-color: #3498db;
 }
 
 .restaurant-name {
