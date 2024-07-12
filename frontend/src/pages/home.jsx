@@ -6,9 +6,9 @@ import logo from '../assets/NYC_Cheap_Eats_logo.png'
 const Home = () => {
   return (
     <div className='Home'>
-      <img src={logo} alt='App logo'/>
+      <img className = 'logoImg' src={logo} alt='App logo'/>
       <div className='header-text'>
-        <h1>Welcome to NYC CHEAP EATS</h1>
+        <h2>Welcome to NYC CHEAP EATS</h2>
       </div>
       <div className='search-bar'>
         <SearchBar/>
