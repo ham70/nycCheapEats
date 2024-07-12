@@ -18,7 +18,7 @@ const Searchresults = () => {
 
   useEffect(() => { retrieveRestaurants() }, [query])
 
-  //getting the restaurants from the array
+  //getting the restaurants from the db
   const retrieveRestaurants = () => {
     RestaurantDataService.find(query)
       .then(response => {
@@ -47,7 +47,7 @@ const Searchresults = () => {
     <div>
       <h1>{headertext}</h1>
       <div className='restaurant-gallery'>
-        {restaurants.map((restaurant) => {
+        {restaurants.length > 0 ? (restaurants.map((restaurant) => {
           const fullAddress = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`
           return (
             <div className="restaurant-item">
@@ -62,7 +62,9 @@ const Searchresults = () => {
               </Link>
             </div>
           )
-        })}
+        })
+      ) : (<div> No results found for: {headertext}</div>)
+      }
       </div>
     </div>
   )

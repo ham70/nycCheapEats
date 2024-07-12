@@ -74,8 +74,10 @@ const Restaurant = () => {
                         <p>{restaurant.address.building} {restaurant.address.street}, {restaurant.address.borough}, {restaurant.address.zipcode}</p>
 
                         <div className='restaurant-text'>
-                            <p className='cuisine-box'><strong>Cuisine Type: </strong>{restaurant.cuisine}</p>
-                            <p className='description-box'><strong>Description: </strong> {restaurant.description} </p>
+                            <div className='cuisine-box'><strong>Cuisine Type: </strong>{restaurant.cuisine}</div>
+                        </div>
+                        <div className='restaurant-text'>     
+                            <div className='description-box'><strong>Description: </strong> {restaurant.description} </div>
                         </div>
                         
                         <div className="image-gallery">
