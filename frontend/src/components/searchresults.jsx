@@ -16,10 +16,16 @@ const Searchresults = () => {
   // all the restaurants returned by the backend when a query is made
   const [restaurants, setRestaurants] = useState([])
 
+  //creating a state variable to see if the client is waiting for a response for the server
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => { retrieveRestaurants() }, [query])
 
   //getting the restaurants from the db
   const retrieveRestaurants = () => {
+    setIsLoading(true)
+    console.log('Loading started')
+
     RestaurantDataService.find(query)
       .then(response => {
         //we retrieve the restaurants data as mulitple arrays because of this
@@ -31,9 +37,13 @@ const Searchresults = () => {
         })
   
         setRestaurants(combinedData)
+
+        setIsLoading(false)
+        console.log('Loading finished')
       })
       .catch(e => {
         console.log(e)
+        setIsLoading(false)
       })
   }
 
@@ -47,7 +57,9 @@ const Searchresults = () => {
     <div>
       <h1>{headertext}</h1>
       <div className='restaurant-gallery'>
-        {restaurants.length > 0 ? (restaurants.map((restaurant) => {
+        {isLoading ? (
+          <p>Loading... This might take a while your first search</p>
+        ) : restaurants.length > 0 ? (restaurants.map((restaurant) => {
           const fullAddress = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`
           return (
             <div className="restaurant-item">
