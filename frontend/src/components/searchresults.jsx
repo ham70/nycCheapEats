@@ -58,7 +58,7 @@ const Searchresults = () => {
       <h1>{headertext}</h1>
       <div className='restaurant-gallery'>
         {isLoading ? (
-          <p>Loading... This might take a while your first search</p>
+          <p>Loading... This might take a while</p>
         ) : restaurants.length > 0 ? (restaurants.map((restaurant) => {
           const fullAddress = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`
           return (

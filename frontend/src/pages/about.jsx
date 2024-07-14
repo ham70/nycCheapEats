@@ -12,11 +12,11 @@ const About = () => {
         </p>
         <p>
           I'm still learning the ins and outs of web-development and I plan on expanding on this sight in the future. Adding more restaurants
-          and features to the site, including a better mobile UI.
+          and features to the site. I also plan on keeping all the source code for this project available on my github at https://github.com/ham70 if anyone is interested.
         </p>
         <p>
-          Ocassionally this site may go down time to time as I experiment with different ways to host this so it is avaiable for all to see.
-          But I plan on keeping all the source code for this project available on my github at https://github.com/ham70 if anyone is interested.
+          When you open this site, your first search may take a while to process. This is because the backend of this website is hosted on Render for free
+          which means the server hosting the backend will spindown with inactivity thus making your first search take longer as the server spins back up.
         </p>
         <p>
           Have a great day! :D
