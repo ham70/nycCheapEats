@@ -305,6 +305,16 @@ body {
   font-size: 20px;
 }
 
+/* Extra small devices*/
+@media (max-width: 599px) {
+  .main-image {
+    max-width: 350px
+  }
+  .description-box {
+    max-width: 320px
+  }
+}
+
 /*restaurant page end =====================================================*/
 
 
