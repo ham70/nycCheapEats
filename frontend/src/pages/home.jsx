@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchBar from '../components/searchbar'
-import logo from '../assets/NYC_Cheap_Eats_logo.png' 
+import logo from '../assets/nycCheapEats_logo500x500.png' 
 
 //
 const Home = () => {
