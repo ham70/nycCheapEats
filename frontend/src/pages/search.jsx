@@ -9,6 +9,7 @@ const Search = () => {
       <div>
         <Searchresults/>
       </div>
+      <div className='footer' />
     </div>
   )
 }
