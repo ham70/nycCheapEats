@@ -25,7 +25,9 @@ const About = () => {
       <h1 className='abt-header'>How To Use</h1>
       <h2>Searching</h2>
       <p className='text-box'>Restaurants may be searched for by name, borough (or any other address details),
-           cuisine, and or any other text that may be found in the description of the restuarant such as food items. </p>
+           cuisine, and or any other text that may be found in the description of the restuarant such as food items. 
+           You can also search 'all' for search queens, manhattan, bronx, and brooklyn at once. Staten Island currently
+           has no restuarants in the database.</p>
       <h2>Social Media Links</h2>
       <p className='text-box'>
         At the buttom of each restaurant page there are 4 icons that link to the restaurant's website, Instagram,
