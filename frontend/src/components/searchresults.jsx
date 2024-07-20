@@ -24,7 +24,6 @@ const Searchresults = () => {
   //getting the restaurants from the db
   const retrieveRestaurants = () => {
     setIsLoading(true)
-    console.log('Loading started')
 
     RestaurantDataService.find(query)
       .then(response => {
@@ -39,7 +38,6 @@ const Searchresults = () => {
         setRestaurants(combinedData)
 
         setIsLoading(false)
-        console.log('Loading finished')
       })
       .catch(e => {
         console.log(e)

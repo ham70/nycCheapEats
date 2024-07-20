@@ -150,6 +150,10 @@ body {
 
 
 /*search page start =====================================================*/
+.footer {
+  padding-bottom: 15px;
+}
+
 .restaurant-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -302,7 +306,7 @@ body {
 }
 
 .social-icons{
-  font-size: 20px;
+  font-size: 30px;
 }
 
 /* Extra small devices*/
