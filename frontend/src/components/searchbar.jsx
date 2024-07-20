@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const SearchBar = () => {
     //state variable representing the search term or query the user searches
@@ -20,6 +21,9 @@ const SearchBar = () => {
         if(searchTerm != ""){//we don't want people to search for nothing
             navigate(`/search/${searchTerm}`)
         }
+        if(searchTerm === 'all'){
+            navigate('/search/queens%20manhattan%20bronx%20brooklyn')
+        }
 
     }
 
@@ -31,7 +35,9 @@ const SearchBar = () => {
                 value={searchTerm}
                 onChange={handleChange}
             />
-            <button onClick={handleSearchSubmit}>search</button>
+            <button className='search-bttn' onClick={handleSearchSubmit}>
+                <FaMagnifyingGlass/>
+            </button>
         </div>
 
     )
