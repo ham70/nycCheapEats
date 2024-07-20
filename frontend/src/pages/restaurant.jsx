@@ -40,18 +40,24 @@ const Restaurant = () => {
     const [streetViewImg, setImage] = useState("")
     const [otherMediaImgs, setOtherMediaImgs] = useState([])
 
+    //creating a state variable to see if the client is waiting for a response for the server
+    const [isLoading, setIsLoading] = useState(false);
 
     //getting restaurant data from api and assigning the proper data to their respective variables
     const getRstaurant = id => {
+        setIsLoading(true)
         RestaurantDataService.get(id)
             .then(response => {
                 console.log(response.data)
                 setRestaurant(response.data.restaurant)
                 setImage(response.data.streetViewImg)
                 setOtherMediaImgs(response.data.otherMediaImgs)
+
+                setIsLoading(false)
             })
             .catch(error => {
                 console.log(error)
+                setIsLoading(false)
             })
         }
     
@@ -66,7 +72,9 @@ const Restaurant = () => {
                 <SearchBar/>
             </div>
             <div className='restaurant'>
-                {restaurant ? (
+                {isLoading ? (
+                    <p>Loading...</p>
+                ) : (restaurant ? (
                     <div>
                         <h3 className='restaurant-title'>{restaurant.name}</h3>
                         <img src={`data:image/png;base64,${streetViewImg}`} className='main-image'/>
@@ -121,7 +129,7 @@ const Restaurant = () => {
                         <p>No restaurant found or selected</p>
                     </div>
 
-                )}
+                ))}
             </div>
         </div>
     )
