@@ -80,6 +80,7 @@ body {
   transition: width 0.5s ease-in-out;
   outline: none;
   box-sizing: border-box;
+  font-size: 16px
 }
 
 .search-bar button {
