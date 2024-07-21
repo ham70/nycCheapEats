@@ -1,8 +1,9 @@
 nycCheapEats is my first ever full stack web application and it is built on the MERN stack (Mongodb, Express, React.js, and Node.js)
 
-This web app functions as a curated catalog of cheap restaurants to eat at in New York City, and although there will not be many restaurants in the database on launch date
-I hope to grow it moving forward as this is a topic of great personal interest to me.
+This web app functions as a curated catalog of cheap restaurants to eat at in New York City, although there will not be many restaurants in the database on launch date
 
-Hope launch this app on the cloud this week (July 7-13 2024) I will update this readme as the status of this project changes.
+I am hosting the backend of this project using the Render free tier and the frontend using the Vercel free tier. I hope to grow this project as time passes in the amountof restaurants in the database, polish of the overall app, and in new features that improve the user experience and information provided.
+
+This app is currently avaiable on [https://nyccheapeats.vercel.app](https://nyccheapeats.vercel.app/)
 
 If you're reading this thank you.
