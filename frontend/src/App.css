@@ -188,10 +188,6 @@ body {
   background-color: #3498db;
 }
 
-.restaurant-name {
-  width: 90%;
-}
-
 .restaurant-street-image{
   margin: 10px;
   object-fit: cover;
@@ -325,6 +321,10 @@ body {
 
 
 /*about page start =====================================================*/
+.footer {
+  padding-bottom: 15px;
+}
+
 .text-box {
   border-radius: 10px;
   background-color: aliceblue;

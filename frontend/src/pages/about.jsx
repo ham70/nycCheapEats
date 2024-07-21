@@ -34,6 +34,7 @@ const About = () => {
         X, and FaceBook accounts in that order respectively from left to right. If there is no link the icon will 
         appear black.
       </p>
+      <div className='footer' />
     </div>
   )
 }
