@@ -27,13 +27,20 @@ const SearchBar = () => {
 
     }
 
+    const handleKeyPress = (event) => {
+        if(event.key == 'Enter') {
+            handleSearchSubmit()
+        }
+    }
+
     return (
         <div className='search-bar'>
             <input
-                type="text"
+                type="search"
                 placeholder="enter keyword(s)"
                 value={searchTerm}
                 onChange={handleChange}
+                onKeyUp={handleKeyPress}
             />
             <button className='search-bttn' onClick={handleSearchSubmit}>
                 <FaMagnifyingGlass/>
