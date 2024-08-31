@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import RestaurantDataService from '../services/restaurant.js'
+import PaginationControls from './PaginationControls.jsx'
 
 //this reast component is essentially a big container to displaying all the 
 //restaurant returned by the database whenever a query is made
@@ -12,20 +13,28 @@ const Searchresults = () => {
   const { query } = useParams()
   const headertext = query
 
+  //getting the page number requested
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const page = parseInt(searchParams.get('page')) || 1
+
   //creating a state variable restaurants as an empty array to later hold 
-  // all the restaurants returned by the backend when a query is made
+  //all the restaurants returned by the backend when a query is made
   const [restaurants, setRestaurants] = useState([])
 
   //creating a state variable to see if the client is waiting for a response for the server
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(() => { retrieveRestaurants() }, [query])
+  //state variable to track the total number of pages
+  const [totalPages, setTotalPages] = useState(0)
+
+  useEffect(() => { retrieveRestaurants() }, [query, page])
 
   //getting the restaurants from the db
   const retrieveRestaurants = () => {
     setIsLoading(true)
 
-    RestaurantDataService.find(query)
+    RestaurantDataService.find(query, page)
       .then(response => {
         //we retrieve the restaurants data as mulitple arrays because of this
         // we want to Combine the restaurants and streetviewImages arrays
@@ -36,6 +45,7 @@ const Searchresults = () => {
         })
   
         setRestaurants(combinedData)
+        setTotalPages(response.data.totalPages)
 
         setIsLoading(false)
       })
@@ -73,9 +83,10 @@ const Searchresults = () => {
             </div>
           )
         })
-      ) : (<div> No results found for: {headertext}</div>)
+      ) : (<div> No results found for: {headertext} page {page}</div>)
       }
       </div>
+      <PaginationControls query={query} currentPage={page} totalPages={totalPages} />
     </div>
   )
 }

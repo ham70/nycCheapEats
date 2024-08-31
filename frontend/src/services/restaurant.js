@@ -9,8 +9,8 @@ import http from '../http-common.js'
 //which is then used to populate the search results page
 
 class RestaurantDataService {
-    find(query) {
-        return http.get(`/search/${query}`)
+    find(query, page) {
+        return http.get(`/search/${query}?page=${page}`)
     }
 
     get(id) {

@@ -4,7 +4,7 @@ import axios from 'axios'
 //baseurl dev setup: 'http://localhost:5555/restaurants' || 'https://nyccheapeats.onrender.com/restaurants'
 
 export default axios.create({
-    baseURL:'https://nyccheapeats.onrender.com/restaurants' || 'http://localhost:5555/restaurants',
+    baseURL: 'https://nyccheapeats.onrender.com/restaurants' || 'http://localhost:5555/restaurants',
     headers: {
         'Content-Type': 'application/json'
     }

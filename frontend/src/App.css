@@ -249,7 +249,37 @@ body {
     height: 325px;
   }
 }
+
+/*pagination controls*/
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0; /* Add some margin around the pagination controls */
+}
+
+.pagination-controls button {
+  background-color: #007bff; /* Button background color */
+  border: none;
+  color: white; /* Text color */
+  padding: 10px 15px; /* Space inside the button */
+  margin: 0 5px; /* Space between buttons */
+  border-radius: 5px; /* Round the buttons */
+  cursor: pointer;
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+.pagination-controls button:hover {
+  background-color: #0056b3; /* Darker color on hover */
+}
+
+.pagination-controls button.active {
+  background-color: #28a745; /* Active page color */
+  transform: scale(1.1); /* Slightly enlarge active button */
+}
 /*search page end =====================================================*/
+
 
 
 /*restaurant page start =====================================================*/
