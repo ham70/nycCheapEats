@@ -74,8 +74,17 @@ router.get('/search/:query', async (request, response) => {
         let { query } = request.params
         const strSearch = query.toString().toLowerCase()
 
-        //getting all the restaurants from the api
-        const restaurants = await Restaurant.find({ $text: { $search: strSearch }})
+        //getting pagination params
+        const page = parseInt(request.query.page) || 1
+        const limit = parseInt(request.query.limit) || 8
+        const skip = (page - 1) * limit
+
+        //getting the total number of restaurants that match the search query
+        const totalRestaurants = await Restaurant.countDocuments({ $text: { $search: strSearch } });
+
+
+        //getting restaurants from the api with pagination
+        const restaurants = await Restaurant.find({ $text: { $search: strSearch }}).skip(skip).limit(limit)
 
         const streetviewImages = restaurants.map(restaurant => {
             //we need to convert the StreetView image to a base64 buffer so it can be displayed on the wedpage
@@ -86,7 +95,14 @@ router.get('/search/:query', async (request, response) => {
         })
     
         //returning data from the restaurants and the streetviewimages as two organized but separate arrays
-        return response.status(200).json({restaurants, streetviewImages})
+        //also returning metadata
+        return response.status(200).json({
+            restaurants,
+            streetviewImages,
+            totalRestaurants,
+            totalPages: Math.ceil(totalRestaurants / limit),
+            currentPage: page
+        });
     } catch (error) {
         console.log(error.message)
         response.status(500).send({message: error.message})
