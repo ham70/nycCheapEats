@@ -8,7 +8,7 @@ import restaurantUploadPagesRoute from './routes/restaurantUploadPagesRoute.js'
 //==================================================================================
 //getting resources from .env file
 dotenv.config()
-const port = process.env.PORT || 8000
+const port = 8000 || process.env.PORT
 const url = process.env.MONGODBURL
 
 //inializing app and handeling middleware
