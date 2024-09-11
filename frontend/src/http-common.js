@@ -7,5 +7,6 @@ export default axios.create({
     baseURL: 'https://nyc-cheap-eats-server.vercel.app/restaurants' || 'http://localhost:5555/restaurants',
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 })
