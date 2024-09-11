@@ -16,9 +16,7 @@ const app = express();
 app.use(express.json())
 app.use(cors(
     {
-        origin: ["https://nyccheapeats.vercel.app"],
-        methods: ["POST", "GET"],
-        credentials: true
+        origin: "https://nyccheapeats.vercel.app"
     }
 ))
 app.set("view engine", "ejs");
