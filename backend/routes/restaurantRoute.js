@@ -35,10 +35,13 @@ router.get('/', async (request, response) => {
         const restaurants = await Restaurant.find({})
 
         //returns object contain all the restaurants and a count of them
-        return response.status(200).json({
-            count: restaurants.length,
-            data: restaurants
-        })
+        return response.status(200).json(
+            {headers: {'Access-Control-Allow-Origin': 'https://nyccheapeats.vercel.app'}},
+            {
+                count: restaurants.length,
+                data: restaurants
+            }
+        )
     } catch (error) {
         console.log(error.message)
         response.status(500).send({message: error.message})
@@ -60,12 +63,14 @@ router.get('/id/:id', async (request, response) => {
         const otherMediaImgs = restaurant.images.OtherMedia.map(img => Buffer.from(img.Data).toString('base64'))
 
         //returns restaurant to client
-        return response.status(200).json({
-            headers: {'Access-Control-Allow-Origin': 'https://nyccheapeats.vercel.app'},
-            restaurant, 
-            streetViewImg, 
-            otherMediaImgs
-        })
+        return response.status(200).json(
+            {headers: {'Access-Control-Allow-Origin': 'https://nyccheapeats.vercel.app'}},
+            {
+                restaurant, 
+                streetViewImg, 
+                otherMediaImgs
+            }
+        )
     } catch (error) {
         console.log(error.message)
         response.status(500).send({message: error.message})
@@ -101,14 +106,16 @@ router.get('/search/:query', async (request, response) => {
     
         //returning data from the restaurants and the streetviewimages as two organized but separate arrays
         //also returning metadata
-        return response.status(200).json({
-            headers: {'Access-Control-Allow-Origin': 'https://nyccheapeats.vercel.app'},
-            restaurants,
-            streetviewImages,
-            totalRestaurants,
-            totalPages: Math.ceil(totalRestaurants / limit),
-            currentPage: page
-        });
+        return response.status(200).json(
+            {headers: {'Access-Control-Allow-Origin': 'https://nyccheapeats.vercel.app'}},
+            {
+                restaurants,
+                streetviewImages,
+                totalRestaurants,
+                totalPages: Math.ceil(totalRestaurants / limit),
+                currentPage: page
+            }
+        );
     } catch (error) {
         console.log(error.message)
         response.status(500).send({message: error.message})
