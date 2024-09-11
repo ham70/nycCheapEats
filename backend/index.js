@@ -16,8 +16,8 @@ const app = express();
 app.use(express.json())
 app.use(cors(
     {
-        origin: "https://nyccheapeats.vercel.app/",
-        methods: 'GET',
+        origin: ["https://nyccheapeats.vercel.app"],
+        methods: ["POST", "GET"],
         credentials: true
     }
 ))
