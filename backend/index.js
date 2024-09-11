@@ -17,7 +17,7 @@ const app = express();
 // CORS configuration
 app.use(cors({
     origin: 'https://nyccheapeats.vercel.app',
-    methods: ['GET', 'POST'],
+    methods: ['GET'],
     credentials: true,
 }));
 
