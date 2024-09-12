@@ -34,6 +34,10 @@ router.get('/', async (request, response) => {
         //recieves all restaurants from db
         const restaurants = await Restaurant.find({})
 
+        //setting cors headers
+        response.setHeader('Access-Control-Allow-Origin', 'https://nyccheapeats.vercel.app')
+        response.setHeader('Access-Control-Allow-Credentials', 'true')
+
         //returns object contain all the restaurants and a count of them
         return response.status(200).json(
             {headers: {'Access-Control-Allow-Origin': 'https://nyccheapeats.vercel.app'}},
@@ -61,6 +65,11 @@ router.get('/id/:id', async (request, response) => {
 
         //creating an array of base64 strings for otherMedia images
         const otherMediaImgs = restaurant.images.OtherMedia.map(img => Buffer.from(img.Data).toString('base64'))
+
+        //setting cors headers
+        response.setHeader('Access-Control-Allow-Origin', 'https://nyccheapeats.vercel.app')
+        response.setHeader('Access-Control-Allow-Credentials', 'true')
+    
 
         //returns restaurant to client
         return response.status(200).json(
@@ -103,11 +112,14 @@ router.get('/search/:query', async (request, response) => {
             //return a new object with the additional images property
             return {streetViewImg}
         })
+
+        //setting cors headers
+        response.setHeader('Access-Control-Allow-Origin', 'https://nyccheapeats.vercel.app')
+        response.setHeader('Access-Control-Allow-Credentials', 'true')
     
         //returning data from the restaurants and the streetviewimages as two organized but separate arrays
         //also returning metadata
         return response.status(200).json(
-            {headers: {'Access-Control-Allow-Origin': 'https://nyccheapeats.vercel.app'}},
             {
                 restaurants,
                 streetviewImages,
