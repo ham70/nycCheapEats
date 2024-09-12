@@ -84,7 +84,7 @@ router.get('/search/:query', async (request, response) => {
 
         //getting pagination params
         const page = parseInt(request.query.page) || 1
-        const limit = parseInt(request.query.limit) || 8
+        const limit = parseInt(request.query.limit) || 1
         const skip = (page - 1) * limit
 
         //getting the total number of restaurants that match the search query
