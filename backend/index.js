@@ -15,11 +15,8 @@ const url = process.env.MONGODBURL
 const app = express()
 
 // CORS configuration
-const corsOptions = {
-    origin: '*',
-    credentials: true
-};
-app.use(cors(corsOptions))
+const corsOptions = {origin: "https://nyccheapeats.vercel.app"};
+app.use(cors())
 
 app.use(express.json())
 app.set('view engine', 'ejs')
