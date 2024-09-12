@@ -44,7 +44,7 @@ const Searchresults = () => {
         const combinedData = names.map((name, index) => ({
           name,
           address: addresses[index],
-          streetViewImg: streetviewImages[index],
+          streetViewImg: streetviewImages[index] ? `data:image/png;base64,${streetviewImages[index]}` : null,
         }));
   
         setRestaurants(combinedData)
