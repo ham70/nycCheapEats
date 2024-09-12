@@ -1,8 +1,11 @@
 { 
-    "version": 2, 
-    "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
-    "headers": [{
-        "Access-Control-Allow-Origin": "https://nyccheapeats.vercel.app",
-        "Access-Control-Allow-Credentials": "true"
+    "version": 2,
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "/api",
+        "headers": {
+            "Access-Control-Allow-Origin": "https://nyccheapeats.vercel.app",
+            "Access-Control-Allow-Credentials": "true"
+        }
     }]
 }
