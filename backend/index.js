@@ -16,7 +16,7 @@ const app = express()
 
 // CORS configuration
 const corsOptions = {
-    origin: 'https://nyccheapeats.vercel.app',
+    origin: '*',
     credentials: true
 };
 app.use(cors(corsOptions))
@@ -25,11 +25,7 @@ app.use(express.json())
 app.set('view engine', 'ejs')
 
 //routes==================================================================================
-app.use('/restaurants', (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://nyccheapeats.vercel.app');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    next();
-}, restaurantsRoute);
+app.use('/restaurants', restaurantsRoute)
 
 //these routes are excluded in prod
 //app.use('/restaurantUpload', restaurantUploadPagesRoute);
