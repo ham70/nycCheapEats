@@ -35,7 +35,7 @@ app.get('/', (request, response) => {
 //==================================================================================
 //connecting to database and running the server
 mongoose
-    .connect(url)
+    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true, connectTimeoutMS: 30000 })
     .then(() => {
         console.log('App connected to database')
 
