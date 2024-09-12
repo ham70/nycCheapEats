@@ -16,7 +16,7 @@ const app = express()
 
 // CORS configuration
 const corsOptions = {origin: "https://nyccheapeats.vercel.app"};
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use(express.json())
 app.set('view engine', 'ejs')
