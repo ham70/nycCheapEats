@@ -39,9 +39,10 @@ const Searchresults = () => {
         //we retrieve the restaurants data as mulitple arrays because of this
         // we want to Combine the names, addresses, and streetviewImages arrays
         //into the restaurants state variable
-        const { names, addresses, streetviewImages } = response.data;
+        const { ids, names, addresses, streetviewImages } = response.data;
 
         const combinedData = names.map((name, index) => ({
+          _id: ids[index],
           name,
           address: addresses[index],
           streetViewImg: streetviewImages[index] ? `data:image/png;base64,${streetviewImages[index]}` : null,

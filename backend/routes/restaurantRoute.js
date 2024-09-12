@@ -93,7 +93,8 @@ router.get('/search/:query', async (request, response) => {
         //getting restaurants from the api with pagination
         const restaurants = await Restaurant.find({ $text: { $search: strSearch }}).select('name address images.StreetView').skip(skip).limit(limit)
 
-        //creating names and addresses arrays to space space on response payload
+        //creating ids, names, and addresses arrays to space space on response payload
+        const ids = restaurants.map(restaurant => restaurant._id);
         const names = restaurants.map(restaurant => restaurant.name);
         const addresses = restaurants.map(restaurant => restaurant.address);
 
@@ -109,6 +110,7 @@ router.get('/search/:query', async (request, response) => {
         //also returning metadata
         return response.status(200).json(
             {
+                ids,
                 names,
                 addresses,
                 streetviewImages,
