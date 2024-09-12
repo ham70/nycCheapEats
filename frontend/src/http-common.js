@@ -4,7 +4,7 @@ import axios from 'axios'
 //baseurl dev setup: 'http://localhost:5555/restaurants' || 'https://nyccheapeats.onrender.com/restaurants'
 
 export default axios.create({
-    baseURL: 'https://nyc-cheap-eats-server.vercel.app/restaurants' || 'http://localhost:5555/restaurants',
+    baseURL: 'https://nyc-cheap-eats-server.vercel.app' || 'http://localhost:5555/restaurants',
     headers: {
         'Content-Type': 'application/json'
     },
