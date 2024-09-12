@@ -99,10 +99,10 @@ router.get('/search/:query', async (request, response) => {
 
         const streetviewImages = restaurants.map(restaurant => {
             //we need to convert the StreetView image to a base64 buffer so it can be displayed on the wedpage
-            const streetViewImg = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
-
-            //return a new object with the additional images property
-            return {streetViewImg}
+            if (restaurant.images && restaurant.images.StreetView && restaurant.images.StreetView.Data) {//checking if the image exists
+                return Buffer.from(restaurant.images.StreetView.Data).toString('base64');//returning the buffer to the image
+            }
+            return null;//returning null if doesn't exist
         })
     
         //returning data from the restaurants and the streetviewimages as two organized but separate arrays
