@@ -37,16 +37,18 @@ const Searchresults = () => {
     RestaurantDataService.find(query, page)
       .then(response => {
         //we retrieve the restaurants data as mulitple arrays because of this
-        // we want to Combine the restaurants and streetviewImages arrays
+        // we want to Combine the names, addresses, and streetviewImages arrays
         //into the restaurants state variable
+        const { names, addresses, streetviewImages } = response.data;
 
-        const combinedData = response.data.restaurants.map((restaurant, index) => {
-          return {...restaurant, streetViewImg: response.data.streetviewImages[index].streetViewImg}
-        })
+        const combinedData = names.map((name, index) => ({
+          name,
+          address: addresses[index],
+          streetViewImg: streetviewImages[index],
+        }));
   
         setRestaurants(combinedData)
         setTotalPages(response.data.totalPages)
-
         setIsLoading(false)
       })
       .catch(e => {
