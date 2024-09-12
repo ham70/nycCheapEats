@@ -25,7 +25,11 @@ app.use(express.json())
 app.set('view engine', 'ejs')
 
 //routes==================================================================================
-app.use('/restaurants', restaurantsRoute)
+app.use('/restaurants', (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://nyccheapeats.vercel.app');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+}, restaurantsRoute);
 
 //these routes are excluded in prod
 //app.use('/restaurantUpload', restaurantUploadPagesRoute);
