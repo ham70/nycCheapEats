@@ -90,12 +90,12 @@ router.get('/search/:query', async (request, response) => {
         //getting the total number of restaurants that match the search query
         const totalRestaurants = await Restaurant.countDocuments({ $text: { $search: strSearch } });
 
+        //getting restaurants from the api with pagination
+        const restaurants = await Restaurant.find({ $text: { $search: strSearch }}).select('name address images.StreetView').skip(skip).limit(limit)
+
         //creating names and addresses arrays to space space on response payload
         const names = restaurants.map(restaurant => restaurant.name);
         const addresses = restaurants.map(restaurant => restaurant.address);
-
-        //getting restaurants from the api with pagination
-        const restaurants = await Restaurant.find({ $text: { $search: strSearch }}).select('name address images.StreetView').skip(skip).limit(limit)
 
         const streetviewImages = restaurants.map(restaurant => {
             //we need to convert the StreetView image to a base64 buffer so it can be displayed on the wedpage
