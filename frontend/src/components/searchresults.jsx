@@ -77,7 +77,7 @@ const Searchresults = () => {
                 <div >
                   <div className='restaurant-name'>{shortenName(restaurant.name)}</div>
                   <div>
-                    <img src= {`data:image/png;base64,${restaurant.streetViewImg}`} alt={restaurant.name} className= "restaurant-street-image"/>
+                    <img src= {restaurant.streetViewImg} alt={restaurant.name} className= "restaurant-street-image"/>
                   </div>
                   <h5 className='restaurant-address'>Address: {fullAddress}</h5>
                 </div>                
