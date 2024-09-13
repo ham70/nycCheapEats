@@ -20,14 +20,8 @@ const Restaurant = () => {
         id: null,
         name: "",
         address: {},
-        images: {
-            StreetView: {
-                Data: null,
-            },
-            OtherMedia: [{
-                Data: null,
-            }]
-        },
+        cuisine: "",
+        description: "",
         links: {
             site: "none",
             insta: "none",
@@ -49,7 +43,7 @@ const Restaurant = () => {
         RestaurantDataService.get(id)
             .then(response => {
                 console.log(response.data)
-                setRestaurant(response.data.restaurant)
+                setRestaurant(response.data.cleanRestaurant)
                 setImage(response.data.streetViewImg)
                 setOtherMediaImgs(response.data.otherMediaImgs)
 
