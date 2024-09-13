@@ -55,6 +55,21 @@ router.get('/id/:id', async (request, response) => {
         //recieves restaurant from db
         const restaurant = await Restaurant.findById(id)
 
+        //we will copy all the values from restaurant and then return those in 3 groups
+        // streetViewImg whcih contains the base64 buffer to our image string of the street view image
+        // otherMediaImgs which is an array of buffers to our other media images
+        // and finally cleanRestaurant which contains all the needed informaiton of the restaurant excluding images
+        // this is done to prevent sending redundant and/or unneeded informaiton to the client
+        // for optimzied data transfer
+        const cleanRestaurant = {
+            id: restaurant.id,
+            name: restaurant.name,
+            address: restaurant.address,
+            cuisine: restaurant.cuisine,
+            description: restaurant.description,
+            links: restaurant.links
+        }
+
         //creating base64 string for restaurant streetview image
         const streetViewImg = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
 
@@ -64,7 +79,7 @@ router.get('/id/:id', async (request, response) => {
         //returns restaurant to client
         return response.status(200).json(
             {
-                restaurant, 
+                cleanRestaurant,
                 streetViewImg, 
                 otherMediaImgs
             }
