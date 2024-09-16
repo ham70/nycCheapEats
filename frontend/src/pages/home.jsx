@@ -8,7 +8,7 @@ const Home = () => {
     <div className='Home'>
       <img className = 'logoImg' src={logo} alt='App logo'/>
       <div className='header-text'>
-        <h2>Welcome to NYC CHEAP EATS</h2>
+        <h2>Welcome! Search by: location, cuisine, and more!</h2>
       </div>
       <div className='search-bar'>
         <SearchBar/>
