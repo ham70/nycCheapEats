@@ -69,6 +69,10 @@ router.get('/id/:id', async (request, response) => {
             description: restaurant.description,
             links: restaurant.links
         }
+        const coords = {
+            lat: restaurant.coords.lat,
+            lng: restaurant.coords.lng
+        }
 
         //creating base64 string for restaurant streetview image
         const streetViewImg = Buffer.from(restaurant.images.StreetView.Data).toString('base64')
@@ -80,6 +84,7 @@ router.get('/id/:id', async (request, response) => {
         return response.status(200).json(
             {
                 cleanRestaurant,
+                coords,
                 streetViewImg, 
                 otherMediaImgs
             }
@@ -236,6 +241,14 @@ router.post('/update/:id', async (request, response) => {
         }
         if(request.body.stars) {
             restaurant.stars = request.body.stars
+        }
+        if(request.body.coords){
+            if(request.body.coords.lat) {
+                restaurant.coords.lat = request.body.coords.lat
+            }
+            if(request.body.coords.lng) {
+                restaurant.coords.lng = request.body.coords.lng
+            }
         }
 
         //all the updated values in the restuarant document are saved

@@ -39,8 +39,11 @@ const restaurantNewSchema = new Schema(
             x: {type: String},
             fb: {type: String},
         },
-        stars: {type: Number}
-        
+        stars: {type: Number},
+        coords: {
+            lat: {type:Number},
+            lng: {type:Number}
+        }
     }
 )
 
