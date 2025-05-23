@@ -1,14 +1,14 @@
 import React, {useState, useEffect } from 'react'
 import RestaurantDataService from '../services/restaurant.js'
-import { useParams, Link } from 'react-router-dom';
-import SearchBar from '../components/searchbar.jsx';
+import { useParams, Link } from 'react-router-dom'
+import SearchBar from '../components/searchbar.jsx'
+import Map from '../components/map.jsx'
 
 //import icons for the website link and social media links
-import { FaFacebook } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa";
-import { CgWebsite } from "react-icons/cg";
-
+import { FaFacebook } from "react-icons/fa"
+import { FaXTwitter } from "react-icons/fa6"
+import { FaInstagram } from "react-icons/fa"
+import { CgWebsite } from "react-icons/cg"
 
 const Restaurant = () => {
     //getting restuarant id and initializing inital state
@@ -29,6 +29,10 @@ const Restaurant = () => {
             fb: "none"
         }
     };
+    const initialCenterState = {//some coords can can be the default center
+        lat: 40.609384,
+        lng: -73.905731
+    }
 
     const [restaurant, setRestaurant] = useState(initialRestaurantState);
     const [streetViewImg, setImage] = useState("")
@@ -36,6 +40,9 @@ const Restaurant = () => {
 
     //creating a state variable to see if the client is waiting for a response for the server
     const [isLoading, setIsLoading] = useState(false);
+
+    //state variable to sotre location used for rendering google maps
+    const [center, setCenter] = useState(initialCenterState);
 
     //getting restaurant data from api and assigning the proper data to their respective variables
     const getRstaurant = id => {
@@ -46,6 +53,8 @@ const Restaurant = () => {
                 setRestaurant(response.data.cleanRestaurant)
                 setImage(response.data.streetViewImg)
                 setOtherMediaImgs(response.data.otherMediaImgs)
+                setCenter(response.data.coords)
+                console.log(`from client: ${center}`)
 
                 setIsLoading(false)
             })
@@ -115,8 +124,7 @@ const Restaurant = () => {
                                 )}
                             </div>
                         </div>
-
-
+                        <Map center = {center}/>
                     </div>
                 ) : (
                     <div>
