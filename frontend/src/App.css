@@ -345,6 +345,12 @@ body {
   font-size: 30px;
 }
 
+.map{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /* Extra small devices*/
 @media (max-width: 599px) {
   .main-image {
