@@ -7,7 +7,6 @@ const containerStyle = {
 }
 
 const  map = (center) => {
-  console.log(center)
     return (
       <div className='map'>
         <APIProvider apiKey={process.env.REACT_APP_MAPSAPIKEY}>
