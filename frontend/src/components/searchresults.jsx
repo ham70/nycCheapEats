@@ -18,15 +18,9 @@ const Searchresults = () => {
   const searchParams = new URLSearchParams(location.search)
   const page = parseInt(searchParams.get('page')) || 1
 
-  //creating a state variable restaurants as an empty array to later hold 
-  //all the restaurants returned by the backend when a query is made
   const [restaurants, setRestaurants] = useState([])
-
-  //creating a state variable to see if the client is waiting for a response for the server
-  const [isLoading, setIsLoading] = useState(false)
-
-  //state variable to track the total number of pages
-  const [totalPages, setTotalPages] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)//creating a state variable to see if the client is waiting for a response for the server
+  const [totalPages, setTotalPages] = useState(0)//to track the total number of pages
 
   useEffect(() => { retrieveRestaurants() }, [query, page])
 
@@ -47,7 +41,6 @@ const Searchresults = () => {
           address: addresses[index],
           streetViewImg: streetviewImages[index] ? `data:image/png;base64,${streetviewImages[index]}` : null,
         }));
-  
         setRestaurants(combinedData)
         setTotalPages(response.data.totalPages)
         setIsLoading(false)

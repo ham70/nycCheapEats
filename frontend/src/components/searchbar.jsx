@@ -24,7 +24,6 @@ const SearchBar = () => {
         if(searchTerm === 'all'){
             navigate('/search/queens%20manhattan%20bronx%20brooklyn')
         }
-
     }
 
     const handleKeyPress = (event) => {
