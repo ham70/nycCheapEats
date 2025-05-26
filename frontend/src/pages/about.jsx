@@ -4,19 +4,14 @@ const About = () => {
   return (
     <div className='long-text'>
       <h1>About NYC CHEAP EATS</h1>
-
       <div className='text-box'>
         <p>Hi everyone thank you for checking out my website. My name is Matthew and nyc cheap eats is a small passion project of mine
           mostly made for the purpose of helping me keep track of all the cheap restaurants I want to eat at or 
           have eatten at in nyc. As a student I want to stretch my dollar as much as possible when going out.
         </p>
         <p>
-          I'm still learning the ins and outs of web-development and I plan on expanding on this sight in the future. Adding more restaurants
-          and features to the site. I also plan on keeping all the source code for this project available on my github at https://github.com/ham70 if anyone is interested.
-        </p>
-        <p>
-          When you open this site, your first search may take a while to process. This is because the backend of this website is hosted on Render for free
-          which means the server hosting the backend will spindown with inactivity thus making your first search take longer as the server spins back up.
+          This site uses locational data solely for the purpose of calculating your distance from any restaurant you view.
+          All the source code for this project available on my github at https://github.com/ham70 if anyone is interested.
         </p>
         <p>
           Have a great day! :D
@@ -38,5 +33,4 @@ const About = () => {
     </div>
   )
 }
-
 export default About
