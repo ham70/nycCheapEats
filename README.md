@@ -1,8 +1,6 @@
 nycCheapEats is my first ever full stack web application and it is built on the MERN stack (Mongodb, Express, React.js, and Node.js)
 
-<video src="demo/demo.mp4" autoplay loop muted playsinline width="600"></video>
-
-<p>demo video</p>
+https://github.com/user-attachments/assets/d58e5b22-320a-4f4e-9be1-2637a2142bcf
 
 This web app functions as a curated catalog of cheap restaurants to eat at in New York City, although there will not be many restaurants in the database on launch date
 
